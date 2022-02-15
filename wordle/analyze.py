@@ -65,7 +65,3 @@ def analyze(words):
             listForTwo = max(wordsAsProbabilities)
             listForTwo = [theWord, words[wordsAsProbabilities.index(listForTwo)]]
             return listForTwo
-        
-        
-   
-    
