@@ -1,5 +1,5 @@
-from helper import helperOcc 
-from helper import helperProb
+from probabilityHelper import helperOcc 
+from probabilityHelper import helperProb
 
 def analyze(words):
     #If only one word no need to analyze
