@@ -1,7 +1,7 @@
 from helper import helperOcc 
 from helper import helperProb
 
-def analyze(words):
+def analyze(words, attemptNum):
     #If only one word no need to analyze
     if len(words) == 1:
         theWord = words[0]  
@@ -58,14 +58,37 @@ def analyze(words):
                 count +=1 
             
             #Choose max
-            theWord = max(wordsAsProbabilities)
-            theWord = words[wordsAsProbabilities.index(theWord)]
-            listForTwo = wordsAsProbabilities
-            listForTwo.remove(max(wordsAsProbabilities))
-            listForTwo = max(wordsAsProbabilities)
-            listForTwo = [theWord, words[wordsAsProbabilities.index(listForTwo)]]
+            theWord = max(wordsAsProbabilities) #Max probability
+            theWord = words[wordsAsProbabilities.index(theWord)] 
+
+            if attemptNum != 1 and attemptNum != 2:
+                theWord = max(wordsAsProbabilities) #Max probability
+                theWord = words[wordsAsProbabilities.index(theWord)] 
+                listForTwo = wordsAsProbabilities
+                words.remove(theWord)
+                listForTwo.remove(max(wordsAsProbabilities))
+                indexOfSecondHigheest = max(listForTwo)
+                listForTwo = [theWord, words[listForTwo.index(indexOfSecondHigheest)]]
+            else:
+                while checkIfRepeated(theWord):
+                    words.remove(theWord)
+                    wordsAsProbabilities.remove(max(wordsAsProbabilities))
+                    theWord = words[wordsAsProbabilities.index(max(wordsAsProbabilities))]
+                
+                words.remove(theWord)
+                wordsAsProbabilities.remove(max(wordsAsProbabilities))
+                secondHigheest = words[wordsAsProbabilities.index(max(wordsAsProbabilities))]
+                while checkIfRepeated(secondHigheest):
+                    words.remove(secondHigheest)
+                    wordsAsProbabilities.remove(max(wordsAsProbabilities))
+                    secondHigheest = words[wordsAsProbabilities.index(max(wordsAsProbabilities))]
+                listForTwo = [theWord, secondHigheest]
             return listForTwo
-        
-        
-   
-    
+def checkIfRepeated(word):
+    repeated = False
+    duplicate = []
+    for letter in word:
+        if(letter in duplicate):
+            repeated = True
+        duplicate.append(letter)
+    return repeated

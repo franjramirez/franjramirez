@@ -2,34 +2,36 @@
 #Make it so once a word is green, ignore that index
 
 def helpRem(results, guess, words):
-    orange = ''
-    green = ''
+    orange = []
+    green = []
     greenIndex = []
     index = 0
+    wordListF = words
+
     for check in results:
         if(check == "g"):
-            words = remGreen(guess, words,index) 
-            green += guess[index]
+            wordListF = remGreen(guess, wordListF,index) 
+            green.append(guess[index])
             greenIndex.append(index)
         index += 1
 
     index = 0
     for check in results:
         if check == "o":
-            words = remOra(guess, words, index) 
-            orange += guess[int(index)]
+            wordListF = remOra(guess, wordListF, index) 
+            orange.append(index)
         index += 1
     
     index = 0
     for check in results:
-        if check == "n":
-            words = remNonHelp(guess, words,index,orange, green, greenIndex)
+        if check == "n" and guess[index] not in green:
+            wordListF = remNonHelp(guess, wordListF,index,orange, green, greenIndex)
         index += 1
 
-    return words
+    return wordListF
+
 
 def remNonHelp(guess, words, index, orange, green, greenIndex):
-    
     if (guess[index] not in orange) & (guess[index] not in green):
         newList = []
         newList = [word for word in words if (guess[index] not in word)]
@@ -41,7 +43,6 @@ def remNonHelp(guess, words, index, orange, green, greenIndex):
                     newList.append(word)
     return newList
 
-    
 
 def remGreen(guess, words, index):
     words = [x for x in words if guess[index] is x[index]]
@@ -53,10 +54,3 @@ def remOra(guess, words, index):
         if (guess[index] != word[index]) & (guess[index] in word):
             newList.append(word)
     return newList
-
-
-
- 
-
-
-    
