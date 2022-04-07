@@ -43,7 +43,6 @@ def remNonHelp(guess, words, index, orange, green, greenIndex):
                     newList.append(word)
     return newList
 
-
 def remGreen(guess, words, index):
     words = [x for x in words if guess[index] is x[index]]
     return words
