@@ -3,8 +3,6 @@ from wordList import wordList
 from readScreen import readScreens
 from helperRemove import helpRem
 
-
-
 def main():
     #VARIABLES
     solved = False #False until it is either solver or exited

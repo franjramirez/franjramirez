@@ -18,9 +18,6 @@ def go():
         go_buttond.pack()
         attempted = False
 
-
-
-
 def answer():
     global listWords
     global attemptNumber
@@ -28,7 +25,9 @@ def answer():
 
     result = wordResult_entry.get()
     listWords  = helpRem(result, word, listWords)
+    print(listWords)
     wordle = analyze(listWords, attemptNumber)
+    print(listWords)
     print(attemptNumber)
     if(len(listWords) == 1):
         word1_label['text'] = f'The word is {wordle}'
@@ -57,11 +56,10 @@ def restart():
     word2_label['text'] = wordle[1]
     attemptNumber = 1
 
-
 attempted = True
 attemptNumber = 1
 word = 'didnt update'
-listWords = wordList() 
+listWords = wordList()
 solved = False
 wordle = analyze(listWords, attemptNumber)
 
@@ -101,8 +99,6 @@ wordResult_label = tk.Label(lower_frame, text="What was the result? (green = g, 
 wordResult_entry = tk.Entry(lower_frame, bg = 'white', fg = 'black')
 wordResult_label.pack()
 wordResult_entry.pack(pady=5)
-# go_button = tk.Button(lower_frame, text="Go!",highlightbackground= 'white',bg = 'white', width=5, command=answer)
-# go_button.pack()
 
 restartButton = tk.Button(root, text = 'Restart', width = 5, command = restart)
 restartButton.pack()
